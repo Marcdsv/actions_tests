@@ -16,8 +16,8 @@ jobs:
         id: regex-test-suites
         with:
           haystack: ${{ github.event.pull_request.body }}
-          needle: '#+ [T|t]est [S|s]uites\n([\S\s]*)\n'
-          mode: 'first'
+          needle: '#+ [T|t]est [S|s]uites\n([\S\s]*)\n\s*\n'
+          mode: all
       
       - name: Regex Test Tags
         uses: paulschuberth/regex-extract-action@v1.0.1
