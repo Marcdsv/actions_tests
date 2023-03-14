@@ -22,5 +22,5 @@ jobs:
         uses: actions-ecosystem/action-regex-match@v2
         id: regex-test-tags
         with:
-          text: ${{ steps.regex-test-suites.outputs.matched_json }}
-          regex_pattern: '- \[[xX]\] (.+)'
+          text: ${{ steps.regex-test-suites.outputs.group1 }}
+          regex: '- \[[xX]\] (.+)'
