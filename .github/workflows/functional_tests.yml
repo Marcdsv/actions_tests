@@ -16,7 +16,7 @@ jobs:
         id: regex-test-suites
         with:
           text: ${{ github.event.pull_request.body }}
-          regex: '^# Test Suites\n([\S\s]*)\n$'
+          regex: '^.*#+ [T|t]est [S|s]uites\n([\S\s]*)\n\s*\n$'
       
       - name: Dump match
         run: |
