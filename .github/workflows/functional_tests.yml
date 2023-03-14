@@ -16,12 +16,12 @@ jobs:
         id: regex-test-suites
         with:
           haystack: ${{ github.event.pull_request.body }}
-          needle: '/#+ [T|t]est [S|s]uites\n([\S\s]*)\n\s*\n/g'
+          needle: /#+ [T|t]est [S|s]uites\n([\S\s]*)\n\s*\n/g
       
       - name: Regex Test Tags
         uses: paulschuberth/regex-extract-action@v1.0.1
         id: regex-test-tags
         with:
           haystack: ${{ steps.regex-test-suites.outputs.group1 }}
-          needle: '/- \[[xX]\] (.+)/g'
+          needle: /- \[[xX]\] (.+)/g
           mode: all
