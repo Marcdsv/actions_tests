@@ -12,16 +12,15 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Regex Test Suites
-        uses: paulschuberth/regex-extract-action@v1.0.1
+        uses: MeilCli/regex-match@v1.0.1
         id: regex-test-suites
         with:
-          haystack: ${{ github.event.pull_request.body }}
-          needle: '#+ [T|t]est [S|s]uites\n([\S\s]*)\n\s*\n'
+          search_string: ${{ github.event.pull_request.body }}
+          regex_pattern: '#+ [T|t]est [S|s]uites\n([\S\s]*)\n\s*\n'
       
       - name: Regex Test Tags
-        uses: paulschuberth/regex-extract-action@v1.0.1
+        uses: MeilCli/regex-match@v1.0.1
         id: regex-test-tags
         with:
-          haystack: ${{ steps.regex-test-suites.outputs.group1 }}
-          needle: '- \[[xX]\] (.+)'
-          mode: all
+          search_string: ${{ steps.regex-test-suites.outputs.matched_json }}
+          regex_pattern: '- \[[xX]\] (.+)'
