@@ -20,3 +20,14 @@ jobs:
         run: |
           echo '${{ steps.regex-match.outputs.match }}'
           echo '${{ steps.regex-match.outputs.group1 }}'
+        
+      - uses: tmelliottjr/extract-regex-action@v1.4.0
+        id: regex-tags
+        with:
+          input: ${{ steps.regex-match.outputs.group1 }}
+          regex: '-\s*\[[xX]\]\s*(.*)'
+
+      - name: Dump tags
+        run: |
+          echo '${{ steps.regex-tags.outputs.resultString }}'
+          echo '${{ steps.regex-tags.outputs.resultArray }}'
