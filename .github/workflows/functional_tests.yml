@@ -16,13 +16,9 @@ jobs:
           input: ${{ github.event.pull_request.body }}
           regex: '(?<=#+\s*[Tt]est\s*[Ss]uites\s*\n)([\S\s]*)(?=\n\s*\n)'
           flags: 'g'
-
-      - name: Dump match
-        run: |
-          echo '${{ steps.regex-match.outputs.resultString }}'
-          echo '${{ steps.regex-match.outputs.resultArray }}'
         
       - uses: tmelliottjr/extract-regex-action@v1.4.0
+        if: ${{ steps.regex-match.outputs.resultString != '' }}
         id: regex-tags
         with:
           input: ${{ steps.regex-match.outputs.resultString }}
@@ -31,5 +27,4 @@ jobs:
 
       - name: Dump tags
         run: |
-          echo '${{ steps.regex-tags.outputs.resultString }}'
-          echo '${{ steps.regex-tags.outputs.resultArray }}'
+          echo join(${{ steps.regex-tags.outputs.resultArray }}, ',')
