@@ -1,7 +1,8 @@
 name: Actions Tests
 
 on:
-  pull_request: [ opened, synchronize, reopened, edited ]
+  pull_request:
+    types: [ opened, synchronize, reopened, edited ]
   workflow_dispatch:
 
 jobs:
