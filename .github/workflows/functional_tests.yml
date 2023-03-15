@@ -25,7 +25,8 @@ jobs:
         id: regex-tags
         with:
           input: ${{ steps.regex-match.outputs.group1 }}
-          regex: '-\s*\[[xX]\]\s*(.*)'
+          regex: '(?<=-\s*\[[xX]\]\s+)(.*)'
+          flags: 'g'
 
       - name: Dump tags
         run: |
