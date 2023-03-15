@@ -20,5 +20,5 @@ jobs:
       
       - name: Dump match
         run: |
-          echo '${{ steps.regex-test-suites.match }}'
-          echo '${{ steps.regex-test-suites.group1 }}'
+          echo '${{ steps.regex-test-suites.outputs.match }}'
+          echo '${{ steps.regex-test-suites.outputs.group1 }}'
