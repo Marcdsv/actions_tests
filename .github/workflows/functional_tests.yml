@@ -15,8 +15,7 @@ jobs:
         with:
           text: ${{ github.event.pull_request.body }}
           regex: '#+ [Tt]est [Ss]uites\n([\S\s]*)\n\s*\n'
-          flags: gm
-      
+ 
       - name: Dump match
         run: |
           echo '${{ steps.regex-test-suites.outputs.match }}'
