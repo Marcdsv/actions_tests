@@ -10,21 +10,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions-ecosystem/action-regex-match@v2
+      - uses: tmelliottjr/extract-regex-action@v1.4.0
         id: regex-match
         with:
-          text: ${{ github.event.pull_request.body }}
-          regex: '#+\s*[Tt]est\s*[Ss]uites\s*\n([\S\s]*)\n\s*\n'
+          input: ${{ github.event.pull_request.body }}
+          regex: '(?<=#+\s*[Tt]est\s*[Ss]uites\s*\n)([\S\s]*)(?=\n\s*\n)'
 
       - name: Dump match
         run: |
-          echo '${{ steps.regex-match.outputs.match }}'
-          echo '${{ steps.regex-match.outputs.group1 }}'
+          echo '${{ steps.regex-match.outputs.resultString }}'
+          echo '${{ steps.regex-match.outputs.resultArray }}'
         
       - uses: tmelliottjr/extract-regex-action@v1.4.0
         id: regex-tags
         with:
-          input: ${{ steps.regex-match.outputs.group1 }}
+          input: ${{ steps.regex-match.outputs.resultString }}
           regex: '(?<=-\s*\[[xX]\]\s+)(.*)'
           flags: 'g'
 
