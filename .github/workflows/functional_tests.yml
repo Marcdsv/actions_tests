@@ -8,15 +8,13 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Regex Test Suites
-        uses: actions-ecosystem/action-regex-match@v2
+      - uses: actions-ecosystem/action-regex-match@v2
         id: regex-test-suites
         with:
           text: ${{ github.event.pull_request.body }}
-          regex: '^(.*)$'
+          regex: '.*'
       
       - name: Dump match
         run: |
