@@ -13,7 +13,7 @@ jobs:
         id: regex-match
         with:
           input: ${{ github.event.pull_request.body }}
-          regex: '(?<=#+\s*[Tt]est\s*[Ss]uites\s*\n)([\S\s]*)(?=\n\s*\n)'
+          regex: '(?<=#+\s*[Tt]est\s*[Ss]uites\s*\n)([\S\s]*)(?=\n\s*)'
           flags: 'g'
         
       - uses: tmelliottjr/extract-regex-action@v1.4.0
