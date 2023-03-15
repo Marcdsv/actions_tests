@@ -15,6 +15,7 @@ jobs:
         with:
           input: ${{ github.event.pull_request.body }}
           regex: '(?<=#+\s*[Tt]est\s*[Ss]uites\s*\n)([\S\s]*)(?=\n\s*\n)'
+          flags: 'g'
 
       - name: Dump match
         run: |
