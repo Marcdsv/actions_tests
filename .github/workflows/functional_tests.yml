@@ -26,5 +26,5 @@ jobs:
 
       - name: Dump tags
         run: |
-          echo ${{ join(steps.regex-tags.outputs.resultArray) }}
+          echo ${{ join(steps.regex-tags.outputs.resultArray, ',') }}
           echo ${{ steps.regex-tags.outputs.resultArray }}
