@@ -11,12 +11,12 @@ jobs:
       - uses: actions/checkout@v3
 
       - uses: actions-ecosystem/action-regex-match@v2
-        id: regex-test-suites
+        id: regex-match
         with:
           text: ${{ github.event.pull_request.body }}
           regex: '^[\S\s]*#+ [Tt]est [Ss]uites\n([\S\s]*)\n\s*\n[\S\s]*$'
 
       - name: Dump match
         run: |
-          echo '${{ steps.regex-test-suites.outputs.match }}'
-          echo '${{ steps.regex-test-suites.outputs.group1 }}'
+          echo '${{ steps.regex-match.outputs.match }}'
+          echo '${{ steps.regex-match.outputs.group1 }}'
