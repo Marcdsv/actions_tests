@@ -25,6 +25,6 @@ jobs:
           flags: 'g'
 
       - name: Dump tags
+        if: ${{ steps.regex-match.outputs.resultString != '' }}
         run: |
           echo ${{ join(fromJSON(steps.regex-tags.outputs.resultArray), ',') }}
-          echo ${{ steps.regex-tags.outputs.resultArray }}
