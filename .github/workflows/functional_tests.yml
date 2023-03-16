@@ -1,0 +1,30 @@
+name: Actions Tests
+
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened, edited ]
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tmelliottjr/extract-regex-action@v1.4.0
+        id: regex-match
+        with:
+          input: ${{ github.event.pull_request.body }}
+          regex: '(?<=#+\s*[Tt]est\s*[Ss]uites\s*\n)([\S\s]*)(?=\n\s*)'
+          flags: 'g'
+        
+      - uses: tmelliottjr/extract-regex-action@v1.4.0
+        if: ${{ steps.regex-match.outputs.resultString != '' }}
+        id: regex-tags
+        with:
+          input: ${{ steps.regex-match.outputs.resultString }}
+          regex: '(?<=-\s*\[[xX]\]\s+)(.*)'
+          flags: 'g'
+
+      - name: Dump tags
+        if: ${{ steps.regex-match.outputs.resultString != '' && steps.regex-tags.outputs.resultString != '' }}
+        run: |
+          echo ${{ join(fromJSON(steps.regex-tags.outputs.resultArray), ',') }}
